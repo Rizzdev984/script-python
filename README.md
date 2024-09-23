@@ -2,8 +2,8 @@ NextTraveller Script
 ==========
  Fungsi
 ~~~~~~~~~~
-* Untuk Fun
-
+Untuk Fun
+~~~~~~~~~~
  Version
 ~~~~~~~~~~
 Beta Version.
