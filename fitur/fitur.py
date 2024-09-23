@@ -1,27 +1,28 @@
-_Z='%Y%m%d%H%M%S'
-_Y='Gagal mengunduh video.'
-_X='tiktok_video.mp4'
-_W='\\u002F'
-_V='playAddr":"(.*?)"'
-_U='Gagal mendapatkan halaman TikTok.'
-_T='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-_S='User-Agent'
-_R='Enter Untuk Kembali'
-_Q='\x1b[31m[ Ai ] For Back'
-_P='Byee... '
-_O='html.parser'
-_N='Masukkan Angka: '
-_M='application/json'
-_L='kertas'
-_K='gunting'
-_J='batu'
-_I='Pertanyaan: '
-_H=False
-_G='wb'
-_F='exit'
-_E='div'
-_D='\n'
-_C='message'
+_a='%Y%m%d%H%M%S'
+_Z='Gagal mengunduh video.'
+_Y='tiktok_video.mp4'
+_X='\\u002F'
+_W='playAddr":"(.*?)"'
+_V='Gagal mendapatkan halaman TikTok.'
+_U='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+_T='User-Agent'
+_S='Enter Untuk Kembali'
+_R='\x1b[31m[ Ai ] For Back'
+_Q='\x1b[31m[ Exit ] For Exits '
+_P='Masukkan Angka: '
+_O='application/json'
+_N='kertas'
+_M='gunting'
+_L='batu'
+_K='\x1b[31m[ Exit ] For Exit'
+_J=False
+_I='wb'
+_H='Byee... '
+_G='\n'
+_F='data'
+_E='Pertanyaan: '
+_D='message'
+_C='exit'
 _B='result'
 _A=True
 import asyncio,re,requests,secrets
@@ -41,12 +42,12 @@ init()
 Token=secrets.token_hex(17)
 app=Flask(__name__)
 def searchVideos(videoName):
-	H='metadata';G='thumb-under';F='thumb';E='mozaique';I=asyncio.new_event_loop();J=r(f"https://www.xnxx.com/search/{videoName}",I);C=BeautifulSoup(J,'html5lib');D=[]
-	if C.find(class_=E)==None:return
+	I='metadata';H='thumb-under';G='thumb';F='mozaique';B='div';J=asyncio.new_event_loop();K=r(f"https://www.xnxx.com/search/{videoName}",J);D=BeautifulSoup(K,'html5lib');E=[]
+	if D.find(class_=F)==None:return
 	else:
-		K=C.find(class_=E).find_all(class_='thumb-block')
-		for A in K:B=A.find(_E,class_=F).findNext('a').attrs['href'];B=f"https://xnxx.com{B}";L=A.find(_E,class_=F).findNext('img').attrs['src'];M=A.find(_E,class_=G).findNext('p').text.strip();N={'duration':A.find(_E,class_=G).find('p',class_=H).contents[1].strip()};D.append({'title':M,'url':B,'thumbnail':L,H:N})
-	return D
+		L=D.find(class_=F).find_all(class_='thumb-block')
+		for A in L:C=A.find(B,class_=G).findNext('a').attrs['href'];C=f"https://xnxx.com{C}";M=A.find(B,class_=G).findNext('img').attrs['src'];N=A.find(B,class_=H).findNext('p').text.strip();O={'duration':A.find(B,class_=H).find('p',class_=I).contents[1].strip()};E.append({'title':N,'url':C,'thumbnail':M,I:O})
+	return E
 @app.route('/')
 def home():return jsonify({'hello':'world'})
 def clear_console():os.system('cls'if os.name=='nt'else'clear')
@@ -54,12 +55,12 @@ def nama():
 	try:A=os.getlogin();return A
 	except Exception as B:return f"Terjadi kesalahan: {B}"
 @app.route('/videos')
-def hVideos():return current_app.response_class(json.dumps(homeVideos(),indent=4),mimetype=_M)
+def hVideos():return current_app.response_class(json.dumps(homeVideos(),indent=4),mimetype=_O)
 @app.route('/videos/<video_name>')
 def sVideos(video_name):
 	B='success';A=searchVideos(str(video_name))
-	if A==None:return jsonify({B:_H,_C:'Not found'})
-	else:return current_app.response_class(json.dumps({B:_A,_C:'Success 200',_B:A},indent=4),mimetype=_M)
+	if A==None:return jsonify({B:_J,_D:'Not found'})
+	else:return current_app.response_class(json.dumps({B:_A,_D:'Success 200',_B:A},indent=4),mimetype=_O)
 def menu_nsfw():
 	print('In [ Maintenance ]');return;B="\n      _   _ ____  _______        __\n | \\ | / ___||  ___\\ \\      / /\n |  \\| \\___ \\| |_   \\ \\ /\\ / / \n | |\\  |___) |  _|   \\ V  V /  \n |_|_\\_|____/|_|_     \\_/\\_/   \n  / ___|_ _| |/ /              \n | |    | || ' /               \n | |___ | || . \\               \n  \\____|___|_|\\_\\              \n                                ";print(B);print('1. Link Videy');print('2. Link Pornhub');print('3. Link Xnxx');print('4. Masuk Bokep Anime');print('5. Masuk Bokep Indonesia Only');print('6. SearchVideo Xnxx [ Name ]');A=int(input('\x1b[31mMasukkan Angka Di Atas\n\x1b[33m>\n\x1b[00m'))
 	if A==1:masukkan_link_videy()
@@ -70,12 +71,12 @@ def menu_nsfw():
 	elif A==6:C=input('Masukkan Nama Bokep Yang Ingin Di Cari => ');searchVideos(C)
 	else:print(Fore.RED+'Input Harus Berupa Angka'+Style.RESET_ALL)
 def menu_tools():
-	B='\n  _____ ___   ___  _     ____  \n |_   _/ _ \\ / _ \\| |   / ___| \n   | || | | | | | | |   \\___ \\ \n   | || |_| | |_| | |___ ___) |\n   |_| \\___/ \\___/|_____|____/ \n                               ';print(_D);print(B);print('1. Cuaca ⌜ ɴᴀᴍᴀ/ᴅᴀᴇʀᴀʜ ⌟');print('2. Encrypt ⌜ ᴄᴏᴅᴇ ⌟');print('3. CekNik ⌜ ɴɪᴋ ⌟');print('4. Decrypt ⌜ ᴄᴏᴅᴇ ⌟');A=int(input(_N))
+	B='\n  _____ ___   ___  _     ____  \n |_   _/ _ \\ / _ \\| |   / ___| \n   | || | | | | | | |   \\___ \\ \n   | || |_| | |_| | |___ ___) |\n   |_| \\___/ \\___/|_____|____/ \n                               ';print(_G);print(B);print('1. Cuaca ⌜ ɴᴀᴍᴀ/ᴅᴀᴇʀᴀʜ ⌟');print('2. Encrypt ⌜ ᴄᴏᴅᴇ ⌟');print('3. CekNik ⌜ ɴɪᴋ ⌟');print('4. Decrypt ⌜ ᴄᴏᴅᴇ ⌟');A=int(input(_P))
 	if A==1:C=input('Masukkan Daerah: ');cuaca(C)
 	elif A==2:D=input(' Code: ');enc(D)
 	elif A==3:E=input('Masukkan Nik: ');ceknik(E)
 	elif A==4:F=input('Masukkan Code: ');G=deobfuscate_code(F);print(G)
-def ceknik(nik):B='data';import requests as C,json;D=nik;E=f"https://skizo.tech/api/checknik?apikey=sell%20aja&nik={D}";F=C.get(E);A=json.loads(F.text);print(f"Nik: {A[_C][B]['nik']}");print(f"Kelamin: {A[_C][B]['jk']}");print(f"Tanggal Lahir: {A[_C][B]['tgl']}");print(f"Kabupaten: {A[_C][B]['kab']}");print(f"Kecamatan: {A[_C][B]['kec']}");print(f"Provinsi: {A[_C][B]['prov']}");print(f"Di Ubah Tanggal: {A[_C][B]['modified_time']}");print(f"[31mSource: {A[_C][B]['source']}"+Style.RESET_ALL)
+def ceknik(nik):import requests as B,json;C=nik;D=f"https://skizo.tech/api/checknik?apikey=sell%20aja&nik={C}";E=B.get(D);A=json.loads(E.text);print(f"Nik: {A[_D][_F]['nik']}");print(f"Kelamin: {A[_D][_F]['jk']}");print(f"Tanggal Lahir: {A[_D][_F]['tgl']}");print(f"Kabupaten: {A[_D][_F]['kab']}");print(f"Kecamatan: {A[_D][_F]['kec']}");print(f"Provinsi: {A[_D][_F]['prov']}");print(f"Di Ubah Tanggal: {A[_D][_F]['modified_time']}");print(f"[31mSource: {A[_D][_F]['source']}"+Style.RESET_ALL)
 def cuaca(daerah):import requests as A;B=f"https://wttr.in/{daerah}";C=A.get(B);print(C.text)
 def enc(code):import requests as A,json;clear_console();B='\n      _____ _   _  ____ ______   ______ _____ \n | ____| \\ | |/ ___|  _ \\ \\ / /  _ \\_   _|\n |  _| |  \\| | |   | |_) \\ V /| |_) || |  \n | |___| |\\  | |___|  _ < | | |  __/ | |  \n |_____|_| \\_|\\____|_| \\_\\|_| |_|    |_|  \n                                           ';print(B);C=f"https://api.shannmoderz.xyz/tools/encrypt?key=sell&query={code}";D=A.get(C);E=json.loads(D.text);F=f"{E[_B]}";print(F)
 def deobfuscate_code(code):
@@ -83,64 +84,108 @@ def deobfuscate_code(code):
 	if A.status_code==200:return''+A.text
 	else:return f"Error: {A.status_code}"
 def menu_ai():
-	B='\n __  __ _____ _      _ _   _      _    ___ \n |  \\/  | ____| \\ | | | | |            / \\  |_ _|\n | |\\/| |  _| |  \\| | | | |  _____    / _ \\  | | \n | |  | | |___| |\\  | |_| | |_____|  / ___ \\ | | \n |_|  |_|_____|_| \\_|\\___/          /_/   \\_\\___|\n                                                 \n    ';print(B);print(_D);print('1. BlackboxAi ⌜ ɪɴ ᴜᴘᴅᴀᴛᴇ ⌟');print('2. AliciaAi ⌜ ǫᴜᴇʀʏ ⌟');print('3. BocchiAi ⌜ ǫᴜᴇʀʏ ⌟');print('4. ZettaAi ⌜ ǫᴜᴇʀʏ ⌟');print('5. GptLogic ⌜ ǫᴜᴇʀʏ ⌟');print('6. Text2Img ⌜ ᴛᴇxᴛ ⌟');A=int(input(_N))
+	B='\n __  __ _____ _      _ _   _      _    ___ \n |  \\/  | ____| \\ | | | | |            / \\  |_ _|\n | |\\/| |  _| |  \\| | | | |  _____    / _ \\  | | \n | |  | | |___| |\\  | |_| | |_____|  / ___ \\ | | \n |_|  |_|_____|_| \\_|\\___/          /_/   \\_\\___|\n                                                 \n    ';print(B);print(_G);print('1. BlackboxAi ⌜ ɪɴ ᴜᴘᴅᴀᴛᴇ ⌟');print('2. AliciaAi ⌜ ǫᴜᴇʀʏ ⌟');print('3. BocchiAi ⌜ ǫᴜᴇʀʏ ⌟');print('4. ZettaAi ⌜ ǫᴜᴇʀʏ ⌟');print('5. GptLogic ⌜ ǫᴜᴇʀʏ ⌟');print('6. Text2Img ⌜ ᴛᴇxᴛ ⌟');print('7. GoodyAi ⌜ sᴇᴀʀᴄʜ ⌟');print('8. LeptonAi ⌜ sᴇᴀʀᴄʜ ⌟');print('9. YouSearch ⌜ sᴇᴀʀᴄʜ ⌟');print('10. Aoyo ⌜ sᴇᴀʀᴄʜ ⌟');print('11. ProdAi ⌜ sᴇᴀʀᴄʜ ⌟');print('12. Gemini ⌜ ǫᴜᴇʀʏ ⌟ ');A=int(input(_P))
 	if A==1:blai()
 	elif A==2:ai2()
 	elif A==3:bocchiai()
 	elif A==4:zettaai()
 	elif A==5:gptlogic()
 	elif A==6:C=input('Masukkan Untuk File Di Simpan, Enter For [ Default ] : ');txt2img(C)
+	elif A==7:goodyai()
+	elif A==8:lepton()
+	elif A==9:searchh()
+	elif A==10:aoyo()
+	elif A==11:prod()
+	elif A==12:gemini()
 def ai(pertanyaan):
 	import requests as B;from bs4 import BeautifulSoup as C;D=f"https://blackbox.ai/?q={pertanyaan}";A=B.get(D)
 	if A.status_code==200:
-		E=C(A.text,_O);F=E.find_all('p')
+		E=C(A.text,'html.parser');F=E.find_all('p')
 		for G in F:print(G.text)
 	else:print(f"Gagal mengambil data. Status kode: {A.status_code}")
 def ai2():
 	import requests as B,json
 	while _A:
-		print(_D);A=input(_I);print(_D)
-		if A.lower()==_F:print('Byee...');break
-		C=f"https://api.kyuurzy.site/api/ai/alicia?query={A}";D=B.get(C);E=json.loads(D.text);print(f"Alicia: {E[_B]}")
-def blai():
-	import requests as A;from bs4 import BeautifulSoup as B;C=input('Query: ');D='https://blackbox.ai/?q={}'.format(C);E=A.get(D);F=B(E.text,_O);G=F.find_all(_E,class_='class_name')
-	for H in G:print(H.text)
+		print(_G);A=input(_E);print(_G)
+		if A.lower()==_C:print('Byee...');break
+		C=f"https://api.kyuurzy.site/api/ai/alicia?query={A}";D=B.get(C);E=json.loads(D.text);print(f"Alicia: {E[_B]}");'\ndef blai():\n    import requests\n    from bs4 import BeautifulSoup\n    text = input("Query: ") \n    url = \'https://blackbox.ai/?q={}\'.format(text)\n    response = requests.get(url)\n    soup = BeautifulSoup(response.text, \'html.parser\')\n# Contoh: Mengambil semua elemen dengan tag tertentu\n    data = soup.find_all(\'div\', class_=\'class_name\')  # Ganti \'class_name\' dengan nama kelas yang sesuai\n    for item in data:\n        print(item.text)\n'
+def goodyai():
+	import json,requests as B
+	while _A:
+		A=input(_E)
+		if A.lower()==_C:print('Byee.... ');break
+		C=f"https://api.shannmoderz.xyz/ai/goody?key=sell&query={A}";D=B.get(C);E=json.loads(D.text);print('\x1b[31m [ Exit ] For Exits '+Style.RESET_ALL);print(f"[33mGoody: {E[_B]}"+Style.RESET_ALL)
+def searchh():
+	import json,requests as B
+	while _A:
+		A=input(_E)
+		if A.lower()==_C:print(_H);break
+		C=f"https://api.shannmoderz.xyz/ai/yousearch?key=sell&query={A}";D=B.get(C);E=json.loads(D.text);print(_Q+Style.RESET_ALL);print(f"[33mYouSearch: {E[_B]} "+Style.RESET_ALL)
+def aoyo():
+	import json,requests as B
+	while _A:
+		A=input(_E)
+		if A.lower()==_C:print(_H);break
+		C=f"https://api.shannmoderz.xyz/ai/aoyo?key=sell&query={A}";D=B.get(C);E=json.loads(D.text);print(_K+Style.RESET_ALL);print(f"[33mAoyo: {E[_B]}"+Style.RESET_ALL)
+		if A.lower()==_C:print(_H);break
 def bocchiai():
 	import requests as B,json
 	while _A:
-		A=input(_I);C=f"https://api.kyuurzy.site/api/ai/Bocchi?query={A}";D=B.get(C);E=json.loads(D.text);print('\x1b[31m[ Enter ] For Exit'+Style.RESET_ALL);print(f"Bocchi: {E[_B]}")
-		if A.lower()==_F:print(_P);break
+		A=input(_E)
+		if A.lower()==_C:print(_H);break
+		C=f"https://api.kyuurzy.site/api/ai/Bocchi?query={A}";D=B.get(C);E=json.loads(D.text);print('\x1b[31m[ Enter ] For Exit'+Style.RESET_ALL);print(f"Bocchi: {E[_B]}")
 def gptlogic():
 	import json,requests as C
 	while _A:
-		A=input(_I);D=f"Hai GptLogic, {A}";E=f"https://apikita.exonity.xyz/api/gptlogic?message={D}&prompt=Ubah%20Bahasa%20Mu%20Menjadi%20Indonesia";F=C.get(E);G=F.text;B=json.loads(G);print('\x1b[31m[ Exit ] For Exits '+Style.RESET_ALL);print(_Q+Style.RESET_ALL)
-		if _B in B:print(f"Pertanyaan: {A}\nJawaban: {B[_B]}")
-		if A.lower()==_F:print(_P);break
+		A=input(_E)
+		if A.lower()==_C:print(_H);break
 		elif A.lower()=='ai':menu_ai
+		D=f"Hai GptLogic, {A}";E=f"https://apikita.exonity.xyz/api/gptlogic?message={D}&prompt=Ubah%20Bahasa%20Mu%20Menjadi%20Indonesia";F=C.get(E);G=F.text;B=json.loads(G);print(_Q+Style.RESET_ALL);print(_R+Style.RESET_ALL)
+		if _B in B:print(f"Pertanyaan: {A}\nJawaban: {B[_B]}")
+def prod():
+	import json,requests as B
+	while _A:
+		A=input(_E)
+		if A.lower()==_C:print(_H);break
+		C=f"https://api.shannmoderz.xyz/ai/prod?key=sell&query={A}";D=B.get(C);E=json.loads(D.text);print(_K+Style.RESET_ALL);print(f"[33mProd: {E[_B]}"+Style.RESET_ALL)
+def lepton():
+	B='Byeee.... ';import json,requests as C
+	while _A:
+		A=input(_E)
+		if A.lower()==_C:print(B);break
+		D=f"https://api.shannmoderz.xyz/ai/lepton?key=sell&query={A}";E=C.get(D);F=json.loads(E.text);print(_K+Style.RESET_ALL);print(f"[33mLepton: {F[_B]} "+Style.RESET_ALL)
+		if A.lower()==_C:print(B);break
+def gemini():
+	import json,requests as B
+	while _A:
+		A=input(_E)
+		if A.lower()==_C:print('Byeee... ');break
+		C=f"https://apisku-furina.vercel.app/api/ai/gemini?text={A}&apikey=indradev";D=B.get(C);E=json.loads(D.text);print(_K+Style.RESET_ALL);print(f"[33mGemini: {E[_F]}"+Style.RESET_ALL)
 def txt2img(file_path='./fitur/Hasil.jpg'):
 	A=file_path;import json
 	while _A:
 		try:
 			B=input('Masukkan Text: ')
-			if B.lower()==_F:print(' Byee... ');break
+			if B.lower()==_C:print(' Byee... ');break
 			elif B.lower()=='ai':menu_ai();continue
 			F=f"https://api.shannmoderz.xyz/ai/txt2img?key=sell&prompt={B}";C=requests.get(F);C.raise_for_status();G=json.loads(C.text);H=G[_B]['url'];D=requests.get(H,stream=_A);D.raise_for_status()
 			if A:
-				E=os.path.dirname(A)
+				E=os.path.dirname('./fitur/Hasil/Hasil.jpg')
 				if not os.path.exists(E):os.makedirs(E)
-				with open(A,_G)as I:
+				with open(A,_I)as I:
 					for J in D.iter_content(chunk_size=8192):I.write(J)
 				print(f"Gambar berhasil diunduh ke {A}")
 			else:print('File path cannot be empty')
 		except requests.exceptions.RequestException as K:print(f"Terjadi kesalahan saat mengunduh gambar: {K}")
-		print('\x1b[31m[ Exit ] For Exits');print(_Q)
+		print('\x1b[31m[ Exit ] For Exits');print(_R)
 def zettaai():
 	import requests as B,json
 	while _A:
-		A=input(_I);C=f"https://api.kyuurzy.site/api/ai/aizeta?query={A}";D=B.get(C);E=json.loads(D.text);print('='*14);print('\x1b[31m[ Enter ] For Exits'+Style.RESET_ALL);print('='*14);print(f"Pertanyaan: {A}\nJawaban Zetta: {E[_B]['answer']}")
-		if A.lower()==_F:break
+		A=input(_E)
+		if A.lower()==_C:break
+		C=f"https://api.kyuurzy.site/api/ai/aizeta?query={A}";D=B.get(C);E=json.loads(D.text);print('='*14);print('\x1b[31m[ Enter ] For Exits'+Style.RESET_ALL);print('='*14);print(f"Pertanyaan: {A}\nJawaban Zetta: {E[_B]['answer']}")
 def menu_fun():
-	C=Fore.RED+'\n       _____ _   _ _   _ \n |  ___| | | | \\ | |\n | |_  | | | |  \\| |\n |  _| | |_| | |\\  |\n |_|    \\___/|_| \\_|\n    Developers: Sell   Teams: Sell | NextTraveller\n   Country: Indonesia                 '+Style.RESET_ALL;print(C);D=Fore.RED+'\n    [ 09 ] For Exit Script\n    [ 99 ] Contact Developers Script\n    [ 01 ] Request Feature To Developers\n    [ 00 ] Back To Main Menu\n    '+Style.RESET_ALL;print(D);print(_D);print('Silahkan Pilih List Di Bawah Ini');print('1. Batu Gunting Kertas');print('2. Apakah ⌜ ᴘᴇʀᴛᴀɴʏᴀᴀɴ ⌟');print('3. Mengapa ⌜ ᴘᴇʀᴛᴀɴʏᴀᴀɴ ⌟');print('4. Kapankah ⌜ ᴘᴇʀᴛᴀɴʏᴀᴀɴ ⌟');print('5. Taugasih');print('6. Kenapasih');print('7. Cantik Cek ⌜ ɴᴀᴍᴀ ⌟');print('8. Lyrics ⌜ ɴᴀᴍᴀ ʟᴀɢᴜ ⌟');print('9. ArtiMimpi ⌜ ᴍɪᴍᴘɪ ᴍᴜ ⌟');A=int(input('Silahkak Pilih Angka Dari List Di Atas\n\x1b[31m=>'+Style.RESET_ALL))
+	C=Fore.RED+'\n       _____ _   _ _   _ \n |  ___| | | | \\ | |\n | |_  | | | |  \\| |\n |  _| | |_| | |\\  |\n |_|    \\___/|_| \\_|\n    Developers: Sell   Teams: Sell | NextTraveller\n   Country: Indonesia                 '+Style.RESET_ALL;print(C);D=Fore.RED+'\n    [ 09 ] For Exit Script\n    [ 99 ] Contact Developers Script\n    [ 01 ] Request Feature To Developers\n    [ 00 ] Back To Main Menu\n    '+Style.RESET_ALL;print(D);print(_G);print('Silahkan Pilih List Di Bawah Ini');print('1. Batu Gunting Kertas');print('2. Apakah ⌜ ᴘᴇʀᴛᴀɴʏᴀᴀɴ ⌟');print('3. Mengapa ⌜ ᴘᴇʀᴛᴀɴʏᴀᴀɴ ⌟');print('4. Kapankah ⌜ ᴘᴇʀᴛᴀɴʏᴀᴀɴ ⌟');print('5. Taugasih');print('6. Kenapasih');print('7. Cantik Cek ⌜ ɴᴀᴍᴀ ⌟');print('8. Lyrics ⌜ ɴᴀᴍᴀ ʟᴀɢᴜ ⌟');print('9. ArtiMimpi ⌜ ᴍɪᴍᴘɪ ᴍᴜ ⌟');A=int(input('Silahkak Pilih Angka Dari List Di Atas\n\x1b[31m=>'+Style.RESET_ALL))
 	if A==1:mulai_game()
 	elif A==2:E=input('Apakah ');apakah(E)
 	elif A==3:F=input('Mengapa ');mengapa(F)
@@ -155,12 +200,12 @@ def menu_fun():
 def lirik(lagu):import requests as B,json;C=f"https://api.betabotz.eu.org/api/search/lirik?lirik={lagu}&apikey=sAhJPUM3";D=B.get(C);A=json.loads(D.text);E=f"\n{A[_B]['title']}";F=f"\n{A[_B]['lyrics']}";G=f"\n{A[_B]['artist']}";print(f"Lyrics:\n{F}Nama Lagu: {E}Artis: {G}")
 def user_pilih():
 	A=input('Silahkan Pilih, Batu, Gunting, Kertas => ').lower()
-	while A not in[_J,_K,_L]:print('Pilihan Tidak Valid');A=input('Silahkan Pilih, Batu, Gunting, Kertas').lower;return A
+	while A not in[_L,_M,_N]:print('Pilihan Tidak Valid');A=input('Silahkan Pilih, Batu, Gunting, Kertas').lower;return A
 def komputer_pilih():return random.choice(['Batu','Gunting','Kertas'])
 def siapa_pemenang(user_pilih,komputer_pilih):
 	B=komputer_pilih;A=user_pilih
 	if A==B:return'Serii Mang'
-	if A==_J and B==_K or A==_K and B==_L or A==_L and B==_J:return'User Menang! '
+	if A==_L and B==_M or A==_M and B==_N or A==_N and B==_L:return'User Menang! '
 	return'Bot Menang!'
 def mulai_game():A=user_pilih();B=komputer_pilih();print(f"Anda Memilih {A}");print(f"Komputer Memilih {B}");C=siapa_pemenang(A,B);print(C)
 def apakah(pertanyaan):A=random.choice(['Iya','Tidak','Mungkin','Mana Ku Tau','Tidak Mungkin','Mungkin Saja','Pasti','Anjay Alok']);B=pertanyaan;C=f"[32m⌜ ᴀᴘᴀᴋᴀʜ ⌟\nᴘᴇʀᴛᴀɴʏᴀᴀɴ: {B}\nᴊᴀᴡᴀʙᴀɴ: {A}"+Style.RESET_ALL;print(C)
@@ -181,13 +226,13 @@ def search(query,index,documents):
 	for D in E:
 		if D in B:A&=set(B[D])
 		else:A=set();break
-	return[C[A]for A in A];input(_R);menu_fun()
-def cantikcek(nama):A=nama;A=A;B=random.randint(1,100);C=f"⌜ ᴄᴀɴᴛɪᴋ ᴄᴇᴋ ⌟\nɴᴀᴍᴀ: {A}\nᴄᴀɴᴛɪᴋ: {B}%";print(C);input(_R);menu_fun()
+	return[C[A]for A in A];input(_S);menu_fun()
+def cantikcek(nama):A=nama;A=A;B=random.randint(1,100);C=f"⌜ ᴄᴀɴᴛɪᴋ ᴄᴇᴋ ⌟\nɴᴀᴍᴀ: {A}\nᴄᴀɴᴛɪᴋ: {B}%";print(C);input(_S);menu_fun()
 def artimimpi(mimpi):
 	import requests as C,json;A=mimpi;D=f"https://api.lolhuman.xyz/api/primbon/artimimpi?apikey=c358f182b9f84da3265683cb&query={A}";E=C.get(D);B=json.loads(E.text)
 	if _B in B:F=f"Mimpi: {A}\nArti Mimpi: {B[_B]}";print(F);input('Silahkan Enter Untuk Kembali');menu_fun()
 def dl():
-	F=' [ Path ] => ';E=' [ Url ] => ';print('Haiii {}'.format(nama()));print(_D);H='  ____   _____        ___   _ _     ___    _    ____    \n     |  _ \\ / _ \\ \\      / / \\ | | |   / _ \\  / \\  |  _ \\   \n     | | | | | | \\ \\ /\\ / /|  \\| | |  | | | |/ _ \\ | | | |  \n     | |_| | |_| |\\ V  V / | |\\  | |__| |_| / ___ \\| |_| |  \n     |____/_\\___/_ \\_/\\_/_ |_| \\_|_____\\___/_/   \\_\\____/   \n     |  \\/  | ____| \\ | | | | |                             \n     | |\\/| |  _| |  \\| | | | |                             \n     | |  | | |___| |\\  | |_| |                             \n     |_|  |_|_____|_| \\_|\\___/                              \n                                                        ';print('1. Yt Downloader');print('2. Ig Downloader');print('3. TikTok Downloader [ In Maintenance ]');print('4. TikTok Downloader2');print('5. Aio Downloder ⌜ ᴍᴘ𝟺/ ᴀʟʟ ᴛʏᴘᴇ ʟɪɴᴋ ⌟');C=int(input('Silahkan Masukkan Angka Berdasarkan Code Di Atas\n>× '))
+	F=' [ Path ] => ';E=' [ Url ] => ';print('Haiii {}'.format(nama()));print(_G);H='  ____   _____        ___   _ _     ___    _    ____    \n     |  _ \\ / _ \\ \\      / / \\ | | |   / _ \\  / \\  |  _ \\   \n     | | | | | | \\ \\ /\\ / /|  \\| | |  | | | |/ _ \\ | | | |  \n     | |_| | |_| |\\ V  V / | |\\  | |__| |_| / ___ \\| |_| |  \n     |____/_\\___/_ \\_/\\_/_ |_| \\_|_____\\___/_/   \\_\\____/   \n     |  \\/  | ____| \\ | | | | |                             \n     | |\\/| |  _| |  \\| | | | |                             \n     | |  | | |___| |\\  | |_| |                             \n     |_|  |_|_____|_| \\_|\\___/                              \n                                                        ';print('1. Yt Downloader');print('2. Ig Downloader');print('3. TikTok Downloader [ In Maintenance ]');print('4. TikTok Downloader2');print('5. Aio Downloder ⌜ ᴍᴘ𝟺/ ᴀʟʟ ᴛʏᴘᴇ ʟɪɴᴋ ⌟');C=int(input('Silahkan Masukkan Angka Berdasarkan Code Di Atas\n>× '))
 	if C==1:A=input(E);B=input(F);yt(A,B)
 	elif C==2:A=input(E);B=input(F);ig(A,B)
 	elif C==3:A=input(E);B=input(F);ttdl(A,B)
@@ -198,29 +243,29 @@ def dl():
 def ttdl(url,path):
 	A=path
 	if not os.path.exists(A):os.makedirs(A)
-	F={_S:_T};B=requests.get(url,headers=F)
-	if B.status_code!=200:print(_U);return
-	C=re.search(_V,B.text)
+	F={_T:_U};B=requests.get(url,headers=F)
+	if B.status_code!=200:print(_V);return
+	C=re.search(_W,B.text)
 	if C:
-		H=C.group(1).replace(_W,'/');D=requests.get(url)
+		H=C.group(1).replace(_X,'/');D=requests.get(url)
 		if D.status_code==200:
-			E=os.path.join(A,_X)
-			with open(E,_G)as G:G.write(D.content)
+			E=os.path.join(A,_Y)
+			with open(E,_I)as G:G.write(D.content)
 			print(f"Video berhasil diunduh ke {E}")
-		else:print(_Y)
+		else:print(_Z)
 	else:print('URL video tidak ditemukan.')
 def tiktok_downloader(url,output_path='.'):
-	A={_S:_T};B=requests.get(url,headers=A)
-	if B.status_code!=200:print(_U);return
-	C=re.search(_V,B.text)
+	A={_T:_U};B=requests.get(url,headers=A)
+	if B.status_code!=200:print(_V);return
+	C=re.search(_W,B.text)
 	if C:
-		G=C.group(1).replace(_W,'/');D=os.path.join(output_path,_X);E=requests.get(G,headers=A,stream=_A)
+		G=C.group(1).replace(_X,'/');D=os.path.join(output_path,_Y);E=requests.get(G,headers=A,stream=_A)
 		if E.status_code==200:
-			with open(D,_G)as H:
+			with open(D,_I)as H:
 				for F in E.iter_content(chunk_size=1024):
 					if F:H.write(F)
 			print(f"Video berhasil diunduh ke {D}")
-		else:print(_Y)
+		else:print(_Z)
 	else:print('URL video tidak ditemukan di halaman TikTok.')
 def aio2(video_url,output_path):
 	C=video_url;B=output_path
@@ -230,18 +275,18 @@ def aio2(video_url,output_path):
 		D=requests.head(C,allow_redirects=_A);D.raise_for_status();F=D.headers.get('Content-Type','')
 		if not F.startswith('video/'):raise ValueError(f"URL tidak mengarah ke file video. Content-Type: {F}")
 		H=int(D.headers.get('Content-Length',0));os.makedirs(os.path.dirname(B),exist_ok=_A);G=requests.get(C,stream=_A);G.raise_for_status()
-		with open(B,_G)as I,tqdm(desc=os.path.basename(B),total=H,unit='iB',unit_scale=_A,unit_divisor=1024)as J:
+		with open(B,_I)as I,tqdm(desc=os.path.basename(B),total=H,unit='iB',unit_scale=_A,unit_divisor=1024)as J:
 			for K in G.iter_content(chunk_size=8192):L=I.write(K);J.update(L)
 		print(f"Video berhasil diunduh dan disimpan ke {B}");return _A
 	except requests.RequestException as A:print(f"Terjadi kesalahan saat mengunduh video: {A}")
 	except ValueError as A:print(f"Kesalahan: {A}")
 	except IOError as A:print(f"Terjadi kesalahan saat menyimpan file: {A}")
 	except Exception as A:print(f"Terjadi kesalahan yang tidak terduga: {A}")
-	return _H
+	return _J
 def aio(video_url,output_path):
 	B=output_path;A=requests.get(video_url,stream=_A)
 	if A.status_code==200:
-		with open(B,_G)as D:
+		with open(B,_I)as D:
 			for C in A.iter_content(chunk_size=1024):
 				if C:D.write(C)
 		print(f"Video berhasil diunduh dan disimpan ke {B}")
@@ -263,22 +308,22 @@ def waktuucapan():
 	else:A='Malam🌃'
 	return A
 def menu_owner():
-	print('Selamat {} User'.format(waktuucapan()));print(_D);D='\n    \x1b[34m _   _ _______  _______                                  \n | \\ | | ____\\ \\/ /_   _|                                 \n |  \\| |  _|  \\  /  | |                                   \n | |\\  | |___ /  \\  | |                                   \n |_|_\\_|_____/_/\\_\\_|_|   _______ _     _     _____ ____  \n |_   _|  _ \\    / \\ \\   / / ____| |   | |   | ____|  _ \\ \n   | | | |_) |  / _ \\ \\ / /|  _| | |   | |   |  _| | |_) |\n   | | |  _ <  / ___ \\ V / | |___| |___| |___| |___|  _ < \n   |_| |_| \\_\\/_/   \\_\\_/  |_____|_____|_____|_____|_| \\_\\'+Style.RESET_ALL;print(D);print('1. Addprem');print('2. Delprem');print('3. Backup File Menu');print('4. Backup File Fitur');A=int(input('Masukkan Angka Dari Di Atas => '))
+	print('Selamat {} User'.format(waktuucapan()));print(_G);D='\n    \x1b[34m _   _ _______  _______                                  \n | \\ | | ____\\ \\/ /_   _|                                 \n |  \\| |  _|  \\  /  | |                                   \n | |\\  | |___ /  \\  | |                                   \n |_|_\\_|_____/_/\\_\\_|_|   _______ _     _     _____ ____  \n |_   _|  _ \\    / \\ \\   / / ____| |   | |   | ____|  _ \\ \n   | | | |_) |  / _ \\ \\ / /|  _| | |   | |   |  _| | |_) |\n   | | |  _ <  / ___ \\ V / | |___| |___| |___| |___|  _ < \n   |_| |_| \\_\\/_/   \\_\\_/  |_____|_____|_____|_____|_| \\_\\'+Style.RESET_ALL;print(D);print('1. Addprem');print('2. Delprem');print('3. Backup File Menu');print('4. Backup File Fitur');A=int(input('Masukkan Angka Dari Di Atas => '))
 	if A==1:addprem()
 	elif A==2:delprem()
 	elif A==3:B='menu.py';C='.';bakcup_menu(B,C)
 	elif A==4:B='fitur.py';C='.';bakcup_fitur(B,C)
 prem=[]
-isPrem=_H
+isPrem=_J
 def addprem():global prem;global isPrem;A=input('ᴍᴀsᴜᴋᴋᴀɴ ɴᴀᴍᴀ ᴜsᴇʀ: ');B=input('ᴍᴀsᴜᴋᴋᴀɴ ᴜᴍᴜʀ ᴜsᴇʀ: ');print('⌜ ɴᴇxᴛᴛʀᴀᴠᴇʟʟᴇʀ ⌟');prem.append(A);prem.append(B);print(f"ʙᴇʀʜᴀsɪʟ ᴍᴇɴᴅᴀғᴛᴀʀ ᴅᴇɴɢᴀɴ ɪᴅ:\nɴᴀᴍᴀ: ⌜ {A} ⌟\nᴜᴍᴜʀ: ⌜ {B} ⌟\n⌜ ᴛʜᴀɴᴋs ғᴏʀ ᴜsɪɴɢ ʙᴏᴛ ɴᴇxᴛᴛʀᴀᴠᴇʟʟᴇʀ ⌟");isPrem=_A;menu_owner()
 def delprem():
 	A=input('Masukkan Nama Users Yang Ingin Di Hapus Dev: ');print(' ⌜ ɴᴇxᴛᴛʀᴀᴠᴇʟʟᴇʀ ⌟')
-	if A in prem:B=prem.index(A);C=prem[B+1];del prem[B:B+2];print('ᴜsᴇʀ ʙᴇʀɴᴀᴍᴀ {} ʙᴇʀʜᴀsɪʟ ᴅɪ ʜᴀᴘᴜs ᴅᴀʀɪ ᴅᴀᴛᴀʙᴀsᴇ ᴜsᴇʀ ᴘʀᴇᴍ\n『 ᴛʜᴀɴᴋs ғᴏʀ ᴜsɪɴɢ ɴᴇxᴛᴛʀᴀᴠᴇʟʟᴇʀ sᴄʀɪᴘᴛ 』\n⌜ ɴᴇxᴛᴛʀᴀᴠᴇʟʟᴇʀ ⌟'.format(A));D=_H;menu_owner()
+	if A in prem:B=prem.index(A);C=prem[B+1];del prem[B:B+2];print('ᴜsᴇʀ ʙᴇʀɴᴀᴍᴀ {} ʙᴇʀʜᴀsɪʟ ᴅɪ ʜᴀᴘᴜs ᴅᴀʀɪ ᴅᴀᴛᴀʙᴀsᴇ ᴜsᴇʀ ᴘʀᴇᴍ\n『 ᴛʜᴀɴᴋs ғᴏʀ ᴜsɪɴɢ ɴᴇxᴛᴛʀᴀᴠᴇʟʟᴇʀ sᴄʀɪᴘᴛ 』\n⌜ ɴᴇxᴛᴛʀᴀᴠᴇʟʟᴇʀ ⌟'.format(A));D=_J;menu_owner()
 def backup_menu(source_file,backup_dir):
 	B=backup_dir;A=source_file
 	if not os.path.exists(B):os.makedirs(B)
-	D=datetime.now().strftime(_Z);E=os.path.basename(A);F=f"{E}_{D}";C=os.path.join(B,F);shutil.copy2(A,C);print(f"File {A} berhasil di-backup ke {C}\n⌜ ᴛʜᴀɴᴋs ғᴏʀ ᴜsɪɴɢ ʙᴏᴛ ɴᴇxᴛᴛʀᴀᴠᴇʟʟᴇʀ ⌟");menu_owner()
+	D=datetime.now().strftime(_a);E=os.path.basename(A);F=f"{E}_{D}";C=os.path.join(B,F);shutil.copy2(A,C);print(f"File {A} berhasil di-backup ke {C}\n⌜ ᴛʜᴀɴᴋs ғᴏʀ ᴜsɪɴɢ ʙᴏᴛ ɴᴇxᴛᴛʀᴀᴠᴇʟʟᴇʀ ⌟");menu_owner()
 def bakcup_fitur(source_file,backup_dir):
 	B=backup_dir;A=source_file
 	if not os.path.exists(B):os.makedirs(B)
-	D=datetime.now().strftime(_Z);E=os.path.basename(A);F=f"{E}_{D}.py";C=os.path.join(B,F);shutil.copy2(A,C);print(f"File {A} berhasil di-backup ke {C}\n⌜ ᴛʜᴀɴᴋs ғᴏʀ ᴜsɪɴɢ ʙᴏᴛ ɴᴇxᴛᴛʀᴀᴠᴇʟʟᴇʀ ⌟");menu_owner()
+	D=datetime.now().strftime(_a);E=os.path.basename(A);F=f"{E}_{D}.py";C=os.path.join(B,F);shutil.copy2(A,C);print(f"File {A} berhasil di-backup ke {C}\n⌜ ᴛʜᴀɴᴋs ғᴏʀ ᴜsɪɴɢ ʙᴏᴛ ɴᴇxᴛᴛʀᴀᴠᴇʟʟᴇʀ ⌟");menu_owner()
